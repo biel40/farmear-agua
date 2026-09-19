@@ -1,1 +1,62 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+	--surface: #ffffff;
+	--surface-strong: #d9f1f2;
+	--water-soft: #dff4f6;
+	--water: #2c9cab;
+	--water-deep: #006d77;
+	--water-dark: #00545d;
+	--ink: #17383e;
+	--ink-muted: #536b70;
+	--line: #d5e7e8;
+	--line-strong: #aacdd0;
+	--focus: rgb(0 109 119 / 24%);
+	--active: #2f855a;
+	--active-soft: #d9f2e4;
+	--paused: #83989c;
+	--warm: #a14c2f;
+	--warm-soft: #fce9df;
+	--danger: #a32929;
+	--font-display: Georgia, "Times New Roman", serif;
+	--font-body: Aptos, "Trebuchet MS", sans-serif;
+	color-scheme: light;
+	font-family: var(--font-body);
+	font-synthesis: none;
+	letter-spacing: 0;
+	text-rendering: optimizeLegibility;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	min-height: 100%;
+	background: #edf7f7;
+}
+
+body {
+	min-height: 100dvh;
+	margin: 0;
+	background-color: #edf7f7;
+	background-image: repeating-linear-gradient(
+		165deg,
+		transparent 0,
+		transparent 4rem,
+		rgb(255 255 255 / 28%) 4rem,
+		rgb(255 255 255 / 28%) 8rem
+	);
+	color: var(--ink);
+}
+
+button,
+input,
+select {
+	letter-spacing: 0;
+}
+
+button,
+select {
+	touch-action: manipulation;
+}

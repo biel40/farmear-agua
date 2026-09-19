@@ -1,0 +1,129 @@
+<main class="app-shell">
+  <header class="app-header">
+    <div class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 32 40">
+        <path d="M16 1C12.8 7.2 3 18.1 3 26.4 3 33.9 8.8 39 16 39s13-5.1 13-12.6C29 18.1 19.2 7.2 16 1Z" />
+        <path class="brand-mark__shine" d="M9.5 25.8c0 3.6 2.4 6.2 5.5 6.8" />
+      </svg>
+    </div>
+    <div>
+      <h1>Farmear Agua</h1>
+      <p>Pequeños recordatorios para mantenerte hidratado.</p>
+    </div>
+  </header>
+
+  <section class="reminder-card" aria-labelledby="reminder-title">
+    <div class="status-row">
+      <div class="drop-visual" aria-hidden="true">
+        <svg viewBox="0 0 72 88">
+          <path d="M36 3C28 18.3 7 39.7 7 57.2 7 74 19.9 85 36 85s29-11 29-27.8C65 39.7 44 18.3 36 3Z" />
+          <path class="drop-visual__shine" d="M21 57c0 8 5.1 13.7 12 15.3" />
+        </svg>
+      </div>
+
+      <div class="status-copy">
+        <span class="eyebrow">Estado actual</span>
+        <h2 id="reminder-title">
+          <span class="status-dot" [class.status-dot--active]="reminder.isActive()"></span>
+          {{ reminder.isActive() ? 'Recordatorios activos' : 'En pausa' }}
+        </h2>
+        <p>
+          {{ reminder.isActive()
+            ? 'Tu próxima pausa para beber agua ya está preparada.'
+            : 'Elige cada cuánto quieres recibir un aviso.' }}
+        </p>
+      </div>
+    </div>
+
+    <form [formGroup]="intervalForm" (submit)="$event.preventDefault()">
+      <fieldset [disabled]="reminder.isActive() || isBusy()">
+        <legend>Frecuencia del recordatorio</legend>
+
+        <label for="interval-preset">Repetir cada</label>
+        <div class="select-control">
+          <select id="interval-preset" formControlName="preset">
+            @for (option of intervalOptions; track option.value) {
+              <option [value]="option.value">{{ option.label }}</option>
+            }
+          </select>
+          <span aria-hidden="true">⌄</span>
+        </div>
+
+        @if (intervalForm.controls.preset.value === 'custom') {
+          <div class="custom-interval">
+            <div>
+              <label for="custom-amount">Cantidad</label>
+              <input
+                id="custom-amount"
+                type="number"
+                inputmode="numeric"
+                min="1"
+                max="1440"
+                formControlName="customAmount"
+                [attr.aria-invalid]="intervalForm.controls.customAmount.invalid"
+              />
+            </div>
+            <div>
+              <label for="custom-unit">Unidad</label>
+              <div class="select-control">
+                <select id="custom-unit" formControlName="customUnit">
+                  <option value="minutes">Minutos</option>
+                  <option value="hours">Horas</option>
+                </select>
+                <span aria-hidden="true">⌄</span>
+              </div>
+            </div>
+          </div>
+          @if (intervalForm.controls.customAmount.invalid) {
+            <p class="field-error">Introduce un número entero entre 1 y 1440.</p>
+          }
+        }
+      </fieldset>
+    </form>
+
+    <button
+      class="primary-action"
+      type="button"
+      data-testid="reminder-action"
+      [class.primary-action--pause]="reminder.isActive()"
+      [disabled]="isBusy() || intervalForm.invalid"
+      (click)="toggleReminders()"
+    >
+      @if (isBusy()) {
+        Actualizando…
+      } @else {
+        {{ reminder.isActive() ? 'Pausar recordatorios' : 'Activar recordatorios' }}
+      }
+    </button>
+
+    @if (feedback()) {
+      <p class="feedback" role="alert">{{ feedback() }}</p>
+    }
+  </section>
+
+  <section class="reminder-details" aria-label="Resumen del recordatorio">
+    <div class="detail-item">
+      <span class="detail-icon" aria-hidden="true">↻</span>
+      <div>
+        <span>Intervalo actual</span>
+        <strong>{{ reminder.intervalLabel() }}</strong>
+      </div>
+    </div>
+
+    <div class="detail-item">
+      <span class="detail-icon" aria-hidden="true">◷</span>
+      <div>
+        <span>Próximo recordatorio</span>
+        <strong>
+          @if (reminder.nextReminderAt(); as nextReminder) {
+            Hoy, {{ nextReminder | date: 'HH:mm' }}
+          } @else {
+            Sin programar
+          }
+        </strong>
+      </div>
+    </div>
+  </section>
+
+  <p class="quiet-note">Puedes cambiar la frecuencia después de pausar los avisos.</p>
+</main>
