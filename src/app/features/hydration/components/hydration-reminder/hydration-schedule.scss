@@ -1,0 +1,157 @@
+form {
+  margin-top: 21px;
+}
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  min-width: 0;
+}
+fieldset:disabled {
+  opacity: 0.55;
+}
+legend {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.interval-presets {
+  display: flex;
+  gap: 7px;
+}
+.interval-presets > button {
+  flex: 1;
+  color: var(--ink);
+  font-size: 13px;
+  border-radius: 11px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  min-height: 44px;
+}
+.interval-presets > button span {
+  font-size: 11px;
+  color: var(--ink-muted);
+}
+.interval-presets > button.selected {
+  background: var(--mint);
+  border-color: color-mix(in srgb, var(--mint-ink) 35%, transparent);
+  color: var(--mint-ink);
+}
+.interval-presets > button.selected span {
+  color: inherit;
+}
+.interval-select {
+  width: 120px;
+}
+select,
+input {
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--surface);
+  color: var(--ink);
+  min-height: 44px;
+  padding: 8px;
+  min-width: 0;
+  width: 100%;
+  font-size: 13px;
+}
+.custom-interval {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+.custom-interval label {
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+.custom-interval input,
+.custom-interval select {
+  display: block;
+  margin-top: 6px;
+}
+.field-error {
+  font-size: 11px;
+  color: var(--danger);
+  line-height: 1.6;
+  margin-top: 10px;
+}
+.next-reminder {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 12px 14px;
+  margin-top: 18px;
+  border-radius: 9px;
+  border: 1px solid var(--line);
+  background: var(--surface-soft);
+}
+.next-reminder.is-active {
+  background: var(--mint);
+}
+.timer-icon {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink-muted);
+}
+.timer-icon svg {
+  width: 23px;
+  height: 23px;
+}
+.next-reminder > div > span {
+  display: block;
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+.next-reminder strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.next-reminder time,
+.timer-dash {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--ink-muted);
+}
+.reminder-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 17px;
+}
+.reminder-actions .primary-button {
+  flex: 1;
+}
+.preview-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: 0;
+  color: var(--ink-muted);
+  font-size: 13px;
+  min-height: 44px;
+  padding: 10px 0;
+  white-space: nowrap;
+}
+.preview-button:hover {
+  color: var(--water-deep);
+}
+.preview-button svg {
+  width: 18px;
+  height: 18px;
+}
+.reminder-note {
+  margin-top: 12px;
+  color: var(--ink-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}

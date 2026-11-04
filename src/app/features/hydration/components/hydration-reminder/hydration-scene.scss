@@ -1,0 +1,194 @@
+.water-scene {
+  grid-area: scene;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  place-items: center;
+  min-width: 0;
+  pointer-events: none;
+}
+
+.scene-art {
+  display: block;
+  width: min(108%, 300px);
+  height: auto;
+  overflow: visible;
+  stroke: none;
+}
+
+.scene-halo {
+  fill: #8be5ff29;
+  transition: fill 0.45s ease;
+}
+
+.scene-complete .scene-halo {
+  fill: #b8ffe94a;
+}
+
+.scene-orbit {
+  stroke: #d7faff61;
+  stroke-width: 1;
+  stroke-dasharray: 2 6;
+}
+
+.glass-shadow {
+  fill: #111d655c;
+}
+
+.hero-glass {
+  transform-origin: center;
+  transform-box: fill-box;
+  transform: rotate(-6deg);
+}
+
+.glass-body {
+  fill: url(#glass-tint);
+}
+
+.glass-rim {
+  fill: #90cafa;
+}
+
+.glass-outline,
+.glass-rim {
+  stroke: #ecfcff;
+  stroke-width: 3;
+}
+
+.glass-shine {
+  stroke: #fff;
+  stroke-width: 4;
+  opacity: 0.68;
+}
+
+.water-fill {
+  transform: translateY(var(--water-level));
+  transition: transform 0.85s cubic-bezier(0.19, 0.86, 0.32, 1.14);
+}
+
+.wave-back {
+  fill: #2e91e6;
+}
+
+.wave-front {
+  fill: url(#water-tint);
+}
+
+.bubble {
+  fill: #c9fffd;
+}
+
+.glass-face {
+  fill: #1c3a73;
+}
+
+.glass-face path {
+  stroke: #1c3a73;
+  stroke-width: 3.4;
+}
+
+.glass-cheek {
+  fill: #fc94c6;
+  opacity: 0.85;
+}
+
+.scene-spark {
+  fill: #d6fff4;
+}
+
+.spark-two {
+  fill: #c2c6ff;
+}
+
+.scene-dot {
+  fill: #b7cdff;
+}
+
+.splash {
+  position: absolute;
+  inset: 0;
+  --splash-accent: #9dfff0;
+  --splash-contrast: #e2e3ff;
+}
+
+.splash--goal {
+  --splash-accent: #ddff9e;
+  --splash-contrast: #ffc9f0;
+}
+
+.splash-ring {
+  position: absolute;
+  inset: 17% 14%;
+  border: 2px solid var(--splash-accent);
+  border-radius: 50%;
+}
+
+.splash i {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  width: 10px;
+  height: 13px;
+  border-radius: 65% 65% 65% 25%;
+  background: var(--splash-accent);
+  --dx: -55px;
+  --dy: -37px;
+  --spin: -55deg;
+}
+
+.splash i:nth-of-type(2n) {
+  background: var(--splash-contrast);
+  width: 7px;
+  height: 8px;
+}
+
+.splash i:nth-of-type(2) {
+  --dx: -68px;
+  --dy: 21px;
+  --spin: 30deg;
+}
+
+.splash i:nth-of-type(3) {
+  --dx: 54px;
+  --dy: -48px;
+  --spin: 85deg;
+}
+
+.splash i:nth-of-type(4) {
+  --dx: 66px;
+  --dy: 17px;
+  --spin: 25deg;
+}
+
+.splash i:nth-of-type(5) {
+  --dx: 21px;
+  --dy: -63px;
+  --spin: 145deg;
+}
+
+.splash i:nth-of-type(6) {
+  --dx: -29px;
+  --dy: 61px;
+  --spin: -35deg;
+}
+
+.water-pop {
+  position: absolute;
+  top: 11%;
+  left: 50%;
+  padding: 6px 11px;
+  border-radius: 999px;
+  background: var(--splash-accent);
+  color: #1b236a;
+  font-size: 14px;
+  font-weight: 800;
+  white-space: nowrap;
+  translate: -50% 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splash-ring,
+  .splash i {
+    display: none;
+  }
+}

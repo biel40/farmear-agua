@@ -1,0 +1,23 @@
+@media (min-width: 1600px) {
+  .sidebar {
+    border-left: 1px solid var(--line);
+  }
+}
+
+@media (761px <= width <= 1240px) {
+  .sidebar {
+    width: 209px;
+    padding-inline: 16px;
+  }
+
+  .main-content {
+    margin-left: 209px;
+    padding-inline: 24px;
+  }
+}
+
+@media (761px <= width <= 960px) {
+  .dashboard-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

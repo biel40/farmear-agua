@@ -1,0 +1,194 @@
+.week-chart {
+  display: flex;
+  justify-content: space-between;
+  gap: 7px;
+  margin-top: 21px;
+}
+.day-column {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.day-value {
+  font-size: 11px;
+  color: var(--ink-muted);
+  height: 12px;
+  white-space: nowrap;
+}
+.day-track {
+  height: 118px;
+  width: 100%;
+  max-width: 34px;
+  border-radius: 7px;
+  background: var(--surface-soft);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+.day-track > span {
+  display: block;
+  min-height: 3px;
+  border-radius: inherit;
+  background: #a8c9ff;
+  transition: height 0.8s ease;
+}
+.is-today .day-track {
+  background: var(--mint);
+}
+.is-today .day-track > span {
+  background: var(--water-deep);
+}
+.is-today .day-label {
+  color: var(--water-deep);
+  font-weight: 650;
+}
+.day-label {
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+.day-column > i {
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  background: transparent;
+  margin-top: -4px;
+}
+.day-column.is-today > i {
+  background: var(--water-deep);
+}
+.is-future {
+  opacity: 0.45;
+}
+.activity-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+.activity-bottom > span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.activity-bottom i {
+  width: 5px;
+  height: 5px;
+  border-radius: 2px;
+  background: #a8c9ff;
+}
+.activity-bottom strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+.recent-section {
+  margin-top: 28px;
+}
+.recent-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.recent-heading h3 {
+  font-size: 17px;
+  font-weight: 750;
+}
+.recent-heading h3 > span {
+  color: var(--ink-muted);
+  font-size: 10px;
+  padding: 4px 6px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  margin-left: 8px;
+}
+.recent-drinks {
+  display: grid;
+  gap: 7px;
+}
+.drink-entry {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 17px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+.mini-drop {
+  width: 36px;
+  height: 36px;
+  background: var(--mint);
+  color: var(--mint-ink);
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+}
+.mini-drop svg {
+  width: 23px;
+  height: 23px;
+}
+.drink-entry strong {
+  font-size: 14px;
+  font-weight: 600;
+}
+.drink-entry time {
+  margin-left: auto;
+  color: var(--ink-muted);
+  font-size: 13px;
+}
+.entry-check {
+  width: 18px;
+  height: 18px;
+  color: var(--water-deep);
+}
+.empty-history {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px dashed var(--line);
+  padding: 18px;
+  border-radius: 12px;
+  color: var(--ink-muted);
+}
+.empty-history > svg {
+  width: 28px;
+  height: 28px;
+  opacity: 0.7;
+}
+.empty-history p {
+  font-size: 14px;
+  line-height: 1.8;
+}
+.empty-history a {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+.page-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0;
+  color: var(--ink-muted);
+  font-size: 9px;
+}
+.page-footer > span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.page-footer svg {
+  width: 12px;
+  height: 12px;
+}

@@ -1,0 +1,117 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 238px;
+  padding: 38px 24px 20px;
+  background: var(--surface);
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  z-index: 5;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 54px;
+}
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 37px;
+  height: 43px;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #6574ff, #3e43cf);
+  color: #e1fffd;
+  box-shadow: 0 4px 10px #4149df40;
+  transform: rotate(-6deg);
+}
+.brand-mark svg {
+  width: 30px;
+  height: 30px;
+  fill: #abffed38;
+}
+.brand h1 {
+  font-size: 18px;
+  letter-spacing: -0.7px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+.brand-period {
+  color: var(--water-deep);
+}
+
+nav {
+  display: grid;
+  gap: 8px;
+}
+.nav-link {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 9px;
+  font-size: 14px;
+  color: var(--ink-muted);
+  border-radius: 10px;
+}
+.nav-link:hover {
+  background: var(--surface-soft);
+  color: var(--water-deep);
+}
+.nav-link--home {
+  background: var(--lavender);
+  color: var(--lavender-ink);
+  font-weight: 750;
+}
+.nav-link--home:hover {
+  background: var(--lavender);
+  color: var(--lavender-ink);
+}
+.nav-icon {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+}
+.nav-link svg {
+  width: 24px;
+  height: 24px;
+}
+.nav-link--home svg {
+  fill: currentColor;
+  fill-opacity: 0.16;
+}
+.sidebar-bottom {
+  margin-top: auto;
+  padding-top: 55px;
+}
+.theme-switch {
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 4px;
+  background: var(--surface-soft);
+}
+.theme-switch button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  flex: 1;
+  border: 0;
+  color: var(--ink-muted);
+  background: transparent;
+  padding: 9px 4px;
+  border-radius: 7px;
+  font-size: 12px;
+}
+.theme-switch button.selected {
+  color: var(--ink);
+  background: var(--surface);
+  box-shadow: 0 2px 5px #00000008;
+}
+.theme-switch svg {
+  width: 18px;
+  height: 18px;
+}

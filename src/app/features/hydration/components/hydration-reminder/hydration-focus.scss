@@ -1,0 +1,90 @@
+.daily-card {
+  grid-column: 1 / -1;
+  padding: 0;
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+.daily-overview {
+  --pool-muted: #d9e6ff;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas:
+    'heading scene'
+    'summary scene'
+    'goal scene';
+  align-items: center;
+  gap: 16px 24px;
+  padding: 26px 30px 27px;
+  border-radius: 27px 27px 0 0;
+  color: #fff;
+  background:
+    radial-gradient(ellipse at 80% 45%, #4766ee 0%, transparent 60%),
+    linear-gradient(125deg, #1b236a, #252d9e);
+}
+
+.daily-overview .card-heading {
+  grid-area: heading;
+}
+
+.daily-overview .card-heading h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--pool-muted);
+}
+
+.daily-overview .card-heading svg {
+  width: 25px;
+  height: 25px;
+  color: #a3faed;
+  fill: #a3faed28;
+}
+
+.daily-summary {
+  grid-area: summary;
+}
+
+.daily-goal {
+  grid-area: goal;
+  min-width: 0;
+}
+
+.daily-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px 18px;
+  padding: 18px 24px 12px;
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .daily-card {
+    border-radius: 24px;
+  }
+
+  .daily-overview {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+    grid-template-areas:
+      'heading scene'
+      'summary scene'
+      'goal goal';
+    gap: 0 4px;
+    padding: 18px 17px 17px;
+    border-radius: 23px 23px 0 0;
+    min-height: 226px;
+  }
+
+  .daily-overview .card-heading {
+    align-self: end;
+  }
+
+  .daily-summary {
+    align-self: start;
+    padding-top: 8px;
+  }
+
+  .daily-controls {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 14px 14px 5px;
+  }
+}

@@ -43,7 +43,12 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "serviceWorker": "ngsw-config.json"
+            },
+            "capacitor": {
+              "outputPath": "dist/farmear-agua-capacitor",
+              "serviceWorker": false
             },
             "development": {
               "optimization": false,

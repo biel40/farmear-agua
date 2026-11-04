@@ -1,129 +1,508 @@
-<main class="app-shell">
-  <header class="app-header">
-    <div class="brand-mark" aria-hidden="true">
-      <svg viewBox="0 0 32 40">
-        <path d="M16 1C12.8 7.2 3 18.1 3 26.4 3 33.9 8.8 39 16 39s13-5.1 13-12.6C29 18.1 19.2 7.2 16 1Z" />
-        <path class="brand-mark__shine" d="M9.5 25.8c0 3.6 2.4 6.2 5.5 6.8" />
-      </svg>
-    </div>
-    <div>
-      <h1>Farmear Agua</h1>
-      <p>Pequeños recordatorios para mantenerte hidratado.</p>
-    </div>
-  </header>
-
-  <section class="reminder-card" aria-labelledby="reminder-title">
-    <div class="status-row">
-      <div class="drop-visual" aria-hidden="true">
-        <svg viewBox="0 0 72 88">
-          <path d="M36 3C28 18.3 7 39.7 7 57.2 7 74 19.9 85 36 85s29-11 29-27.8C65 39.7 44 18.3 36 3Z" />
-          <path class="drop-visual__shine" d="M21 57c0 8 5.1 13.7 12 15.3" />
-        </svg>
+<svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <symbol id="i-drop" viewBox="0 0 24 24">
+      <path d="M12 3C9 7 5.5 10.5 5.5 15a6.5 6.5 0 0 0 13 0C18.5 10.5 15 7 12 3Z" />
+      <path d="M9 15a3 3 0 0 0 3 3" />
+    </symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24">
+      <rect x="3.5" y="13" width="4" height="7" rx="1.4" />
+      <rect x="10" y="8" width="4" height="12" rx="1.4" />
+      <rect x="16.5" y="4" width="4" height="16" rx="1.4" />
+    </symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24">
+      <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4M12 2V1" />
+    </symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" />
+    </symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24">
+      <path d="M20.5 14A9 9 0 0 1 10 3.5 9 9 0 1 0 20.5 14Z" />
+    </symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5" /></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3 2" />
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6" /></symbol>
+    <symbol id="i-glass" viewBox="0 0 24 24">
+      <path d="M5 7h14l-1.6 12a2 2 0 0 1-2 1.7H8.6a2 2 0 0 1-2-1.7L5 7Zm1 6c4-2.5 8 2.5 12 0" />
+    </symbol>
+    <symbol id="i-cup" viewBox="0 0 24 24">
+      <path d="M5 3h14l-1.7 16a2 2 0 0 1-2 1.8H8.7a2 2 0 0 1-2-1.8L5 3Zm1 9c4-3 8 3 12 0" />
+    </symbol>
+    <symbol id="i-bottle" viewBox="0 0 24 24">
+      <path
+        d="M9 3h6v4l2 2c1 1 1 1.5 1 3v6a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3v-6c0-1.5 0-2 1-3l2-2V3Zm0 3h6m-9 8c4-3 8 3 12 0"
+      />
+    </symbol>
+    <symbol id="i-undo" viewBox="0 0 24 24">
+      <path d="M9 5 4 10l5 5M4 10h10a5 5 0 0 1 0 10h-3" />
+    </symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6" /></symbol>
+  </defs>
+</svg>
+<div class="app-layout">
+  <aside class="sidebar">
+    <a
+      class="brand"
+      href="#today"
+      aria-label="Farmear Agua, inicio"
+      (click)="activeSection.set('today')"
+    >
+      <span class="brand-mark"
+        ><svg><use href="#i-drop" /></svg
+      ></span>
+      <span
+        ><h1>Farmear Agua<span class="brand-period">.</span></h1></span
+      >
+    </a>
+    <button
+      class="icon-button mobile-theme"
+      type="button"
+      [attr.aria-label]="theme() === 'light' ? 'Activar modo oscuro' : 'Activar modo claro'"
+      (click)="setTheme(theme() === 'light' ? 'dark' : 'light')"
+    >
+      <svg><use [attr.href]="theme() === 'light' ? '#i-moon' : '#i-sun'" /></svg>
+    </button>
+    <nav aria-label="Navegación principal">
+      <a
+        class="nav-link"
+        [class.nav-link--home]="activeSection() === 'today'"
+        [attr.aria-current]="activeSection() === 'today' ? 'location' : null"
+        href="#today"
+        (click)="activeSection.set('today')"
+        ><span class="nav-icon"
+          ><svg aria-hidden="true"><use href="#i-drop" /></svg
+        ></span>
+        Hoy</a
+      >
+      <a
+        class="nav-link"
+        [class.nav-link--home]="activeSection() === 'activity'"
+        [attr.aria-current]="activeSection() === 'activity' ? 'location' : null"
+        href="#activity"
+        (click)="activeSection.set('activity')"
+        ><span class="nav-icon"
+          ><svg aria-hidden="true"><use href="#i-chart" /></svg
+        ></span>
+        Historial</a
+      >
+      <a
+        class="nav-link"
+        [class.nav-link--home]="activeSection() === 'reminders'"
+        [attr.aria-current]="activeSection() === 'reminders' ? 'location' : null"
+        href="#reminders"
+        (click)="activeSection.set('reminders')"
+        ><span class="nav-icon"
+          ><svg aria-hidden="true"><use href="#i-bell" /></svg
+        ></span>
+        Recordatorios</a
+      >
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="theme-switch" role="group" aria-label="Apariencia">
+        <button
+          type="button"
+          [class.selected]="theme() === 'light'"
+          [attr.aria-pressed]="theme() === 'light'"
+          (click)="setTheme('light')"
+        >
+          <svg><use href="#i-sun" /></svg> Claro
+        </button>
+        <button
+          type="button"
+          [class.selected]="theme() === 'dark'"
+          [attr.aria-pressed]="theme() === 'dark'"
+          (click)="setTheme('dark')"
+        >
+          <svg><use href="#i-moon" /></svg> Oscuro
+        </button>
       </div>
-
-      <div class="status-copy">
-        <span class="eyebrow">Estado actual</span>
-        <h2 id="reminder-title">
-          <span class="status-dot" [class.status-dot--active]="reminder.isActive()"></span>
-          {{ reminder.isActive() ? 'Recordatorios activos' : 'En pausa' }}
-        </h2>
-        <p>
-          {{ reminder.isActive()
-            ? 'Tu próxima pausa para beber agua ya está preparada.'
-            : 'Elige cada cuánto quieres recibir un aviso.' }}
-        </p>
-      </div>
     </div>
+  </aside>
 
-    <form [formGroup]="intervalForm" (submit)="$event.preventDefault()">
-      <fieldset [disabled]="reminder.isActive() || isBusy()">
-        <legend>Frecuencia del recordatorio</legend>
+  <main id="today" class="main-content">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">Tu ritual de hidratación</p>
+        <h2>Hoy</h2>
+      </div>
+      <time class="date-pill" [attr.datetime]="journal.today()">{{ currentDate() }}</time>
+    </header>
 
-        <label for="interval-preset">Repetir cada</label>
-        <div class="select-control">
-          <select id="interval-preset" formControlName="preset">
-            @for (option of intervalOptions; track option.value) {
-              <option [value]="option.value">{{ option.label }}</option>
-            }
-          </select>
-          <span aria-hidden="true">⌄</span>
-        </div>
-
-        @if (intervalForm.controls.preset.value === 'custom') {
-          <div class="custom-interval">
-            <div>
-              <label for="custom-amount">Cantidad</label>
-              <input
-                id="custom-amount"
-                type="number"
-                inputmode="numeric"
-                min="1"
-                max="1440"
-                formControlName="customAmount"
-                [attr.aria-invalid]="intervalForm.controls.customAmount.invalid"
-              />
+    <div class="dashboard-grid">
+      <section class="card daily-card" id="water-log" aria-labelledby="daily-title">
+        <div class="daily-overview">
+          <div class="card-heading">
+            <h3 id="daily-title">
+              <svg aria-hidden="true"><use href="#i-drop" /></svg>
+              Agua de hoy
+            </h3>
+          </div>
+          <div class="daily-summary">
+            <div class="water-total" aria-live="polite">
+              <strong>{{ journal.total().toLocaleString('es-ES') }}</strong
+              ><span>ml</span>
             </div>
-            <div>
-              <label for="custom-unit">Unidad</label>
-              <div class="select-control">
-                <select id="custom-unit" formControlName="customUnit">
-                  <option value="minutes">Minutos</option>
-                  <option value="hours">Horas</option>
+            <p class="progress-caption">
+              @if (journal.remaining() === 0) {
+                ¡Objetivo cumplido!
+              } @else if (journal.total() > 0) {
+                Faltan {{ journal.remaining().toLocaleString('es-ES') }} ml
+              } @else {
+                Cada sorbo cuenta.
+              }
+            </p>
+          </div>
+          <div class="daily-goal">
+            <div class="goal-row">
+              <label class="goal-control" for="water-goal"
+                >Meta diaria
+                <select
+                  id="water-goal"
+                  [value]="journal.goal()"
+                  (change)="journal.setGoal(+$any($event.target).value)"
+                >
+                  <option value="1000">1.000 ml</option>
+                  <option value="1500">1.500 ml</option>
+                  <option value="2000">2.000 ml</option>
+                  <option value="2500">2.500 ml</option>
+                  <option value="3000">3.000 ml</option>
                 </select>
-                <span aria-hidden="true">⌄</span>
-              </div>
+              </label>
+              <span class="progress-badge" [class.complete]="journal.remaining() === 0"
+                >{{ dailyProgress() }} %</span
+              >
+            </div>
+            <div
+              class="progress-track"
+              role="progressbar"
+              aria-label="Progreso del objetivo diario"
+              [attr.aria-valuenow]="dailyProgress()"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              <span [style.width.%]="dailyProgress()"></span>
             </div>
           </div>
-          @if (intervalForm.controls.customAmount.invalid) {
-            <p class="field-error">Introduce un número entero entre 1 y 1440.</p>
-          }
-        }
-      </fieldset>
-    </form>
+          <div
+            class="water-scene"
+            [class.scene-complete]="journal.remaining() === 0"
+            aria-hidden="true"
+          >
+            <svg class="scene-art" viewBox="0 0 256 232">
+              <defs>
+                <clipPath id="glass-inside">
+                  <path d="M70 62H186L174 173Q172 193 154 194H102Q84 193 82 173Z" />
+                </clipPath>
+                <linearGradient id="glass-tint" x2="1" y2="1">
+                  <stop stop-color="#d9fcff" />
+                  <stop offset="1" stop-color="#77bbf5" />
+                </linearGradient>
+                <linearGradient id="water-tint" x2="0" y2="1">
+                  <stop stop-color="#5cf5e3" />
+                  <stop offset="1" stop-color="#38b4ff" />
+                </linearGradient>
+              </defs>
+              <circle class="scene-halo" cx="128" cy="111" r="90" />
+              <circle class="scene-orbit" cx="128" cy="111" r="107" />
+              <ellipse class="glass-shadow" cx="128" cy="208" rx="58" ry="9" />
+              <path
+                class="scene-spark spark-one"
+                d="M205 29Q207 43 220 45Q207 47 205 61Q203 47 190 45Q203 43 205 29Z"
+              />
+              <path
+                class="scene-spark spark-two"
+                d="M53 134Q55 144 65 146Q55 148 53 158Q51 148 41 146Q51 144 53 134Z"
+              />
+              <circle class="scene-dot" cx="51" cy="72" r="3" />
+              <circle class="scene-dot" cx="215" cy="147" r="4" />
+              <g class="hero-glass">
+                <path
+                  class="glass-body"
+                  d="M70 62H186L174 173Q172 193 154 194H102Q84 193 82 173Z"
+                />
+                <g clip-path="url(#glass-inside)">
+                  <g class="water-fill" [style.--water-level]="114 - dailyProgress() * 1.14 + 'px'">
+                    <path
+                      class="wave wave-back"
+                      d="M34 91C64 71 94 106 130 86S189 88 222 84V204H34Z"
+                    />
+                    <path
+                      class="wave wave-front"
+                      d="M32 91C64 111 89 79 130 91S189 105 224 84V204H32Z"
+                    />
+                    <circle class="bubble bubble-one" cx="100" cy="174" r="4" />
+                    <circle class="bubble bubble-two" cx="158" cy="173" r="3" />
+                    <circle class="bubble bubble-three" cx="142" cy="183" r="5" />
+                  </g>
+                </g>
+                <path
+                  class="glass-outline"
+                  d="M70 62H186L174 173Q172 193 154 194H102Q84 193 82 173Z"
+                />
+                <ellipse class="glass-rim" cx="128" cy="61" rx="59" ry="13" />
+                <path class="glass-shine" d="m85 85 4 35m4 31 2 17" />
+                <g class="glass-face">
+                  <ellipse cx="109" cy="137" rx="4" ry="6" />
+                  <ellipse cx="147" cy="137" rx="4" ry="6" />
+                  <path d="M120 144Q128 157 136 144" />
+                  <ellipse class="glass-cheek" cx="101" cy="148" rx="6" ry="3" />
+                  <ellipse class="glass-cheek" cx="155" cy="148" rx="6" ry="3" />
+                </g>
+              </g>
+            </svg>
+            @for (feedback of waterFeedback(); track feedback.id) {
+              <div class="splash" [class.splash--goal]="feedback.goal">
+                <span class="splash-ring"></span>
+                <i></i><i></i><i></i><i></i><i></i><i></i>
+                <span class="water-pop">{{
+                  feedback.goal ? '¡Meta!' : '+' + feedback.amount + ' ml'
+                }}</span>
+              </div>
+            }
+          </div>
+        </div>
+        <div class="daily-controls">
+          <div class="amount-picker" role="group" aria-label="Cantidad por toma">
+            @for (amount of waterAmounts; track amount.ml) {
+              <button
+                type="button"
+                [class.selected]="selectedAmount() === amount.ml"
+                [attr.aria-pressed]="selectedAmount() === amount.ml"
+                (click)="selectedAmount.set(amount.ml)"
+              >
+                <svg aria-hidden="true"><use [attr.href]="amount.icon" /></svg>
+                <span>{{ amount.ml }} ml</span>
+              </button>
+            }
+          </div>
+          <button class="primary-button add-water" type="button" (click)="addWater()">
+            <svg aria-hidden="true"><use href="#i-plus" /></svg> Registrar agua
+            <span>+{{ selectedAmount() }} ml</span>
+          </button>
+          <button
+            class="undo-button"
+            type="button"
+            [disabled]="journal.drinks().length === 0"
+            (click)="undoWater()"
+          >
+            <svg aria-hidden="true"><use href="#i-undo" /></svg> Deshacer
+          </button>
+        </div>
+      </section>
 
-    <button
-      class="primary-action"
-      type="button"
-      data-testid="reminder-action"
-      [class.primary-action--pause]="reminder.isActive()"
-      [disabled]="isBusy() || intervalForm.invalid"
-      (click)="toggleReminders()"
-    >
-      @if (isBusy()) {
-        Actualizando…
-      } @else {
-        {{ reminder.isActive() ? 'Pausar recordatorios' : 'Activar recordatorios' }}
-      }
-    </button>
-
-    @if (feedback()) {
-      <p class="feedback" role="alert">{{ feedback() }}</p>
-    }
-  </section>
-
-  <section class="reminder-details" aria-label="Resumen del recordatorio">
-    <div class="detail-item">
-      <span class="detail-icon" aria-hidden="true">↻</span>
-      <div>
-        <span>Intervalo actual</span>
-        <strong>{{ reminder.intervalLabel() }}</strong>
-      </div>
-    </div>
-
-    <div class="detail-item">
-      <span class="detail-icon" aria-hidden="true">◷</span>
-      <div>
-        <span>Próximo recordatorio</span>
-        <strong>
-          @if (reminder.nextReminderAt(); as nextReminder) {
-            Hoy, {{ nextReminder | date: 'HH:mm' }}
+      <section class="card reminders-card" id="reminders" aria-labelledby="reminder-title">
+        <div class="card-heading">
+          <h3 id="reminder-title">
+            <span class="icon-tile peach"
+              ><svg><use href="#i-bell" /></svg
+            ></span>
+            Recordatorios
+          </h3>
+          <span class="status-badge" [class.active]="reminder.isActive()"
+            ><i></i>{{ reminder.isActive() ? 'Activos' : 'En pausa' }}</span
+          >
+        </div>
+        <form [formGroup]="intervalForm" (submit)="$event.preventDefault()">
+          <fieldset [disabled]="reminder.isActive() || isBusy()">
+            <legend>Cada</legend>
+            <div class="interval-presets">
+              @for (preset of ['15', '30', '60']; track preset) {
+                <button
+                  type="button"
+                  [class.selected]="intervalForm.controls.preset.value === preset"
+                  [attr.aria-pressed]="intervalForm.controls.preset.value === preset"
+                  (click)="intervalForm.controls.preset.setValue($any(preset))"
+                >
+                  {{ preset }} <span>min</span>
+                </button>
+              }
+              <label class="interval-select"
+                ><span class="sr-only">Otra frecuencia</span
+                ><select id="interval-preset" formControlName="preset">
+                  @for (option of intervalOptions; track option.value) {
+                    <option [value]="option.value">{{ option.label }}</option>
+                  }
+                </select></label
+              >
+            </div>
+            @if (intervalForm.controls.preset.value === 'custom') {
+              <div class="custom-interval">
+                <label for="custom-amount"
+                  >Cantidad<input
+                    id="custom-amount"
+                    type="number"
+                    inputmode="numeric"
+                    min="1"
+                    max="1440"
+                    step="1"
+                    formControlName="customAmount"
+                    [attr.aria-invalid]="intervalForm.invalid"
+                    aria-describedby="interval-help" /></label
+                ><label for="custom-unit"
+                  >Unidad<select id="custom-unit" formControlName="customUnit">
+                    <option value="minutes">Minutos</option>
+                    <option value="hours">Horas</option>
+                  </select></label
+                >
+              </div>
+              @if (intervalForm.invalid) {
+                <p id="interval-help" class="field-error" role="alert">
+                  Elige un intervalo entero de entre 1 minuto y 24 horas.
+                </p>
+              }
+            }
+          </fieldset>
+        </form>
+        <div class="next-reminder" [class.is-active]="reminder.isActive()">
+          <span class="timer-icon"
+            ><svg><use href="#i-clock" /></svg
+          ></span>
+          <div>
+            <span>Próximo aviso</span
+            ><strong>{{
+              reminder.isActive() ? 'Dentro de ' + reminder.countdown() : 'Sin programar'
+            }}</strong>
+          </div>
+          @if (reminder.nextReminderAt(); as next) {
+            <time>{{ next | date: 'HH:mm' }}</time>
           } @else {
-            Sin programar
+            <span class="timer-dash">—</span>
           }
-        </strong>
-      </div>
-    </div>
-  </section>
+        </div>
+        <div class="reminder-actions">
+          <button
+            class="primary-button"
+            type="button"
+            data-testid="reminder-action"
+            [disabled]="isBusy() || (!reminder.isActive() && intervalForm.invalid)"
+            (click)="toggleReminders()"
+          >
+            <svg><use [attr.href]="reminder.isActive() ? '#i-clock' : '#i-bell'" /></svg
+            >{{ isBusy() ? 'Actualizando…' : reminder.isActive() ? 'Pausar' : 'Activar' }}</button
+          ><button class="preview-button" type="button" (click)="openReminder()">
+            Probar aviso <svg><use href="#i-arrow" /></svg>
+          </button>
+        </div>
+        <p class="reminder-note">
+          {{
+            isNative
+              ? 'Pausa para cambiar la frecuencia.'
+              : 'Mantén la app abierta para recibir avisos.'
+          }}
+        </p>
+        @if (feedback()) {
+          <p class="field-error" role="alert">{{ feedback() }}</p>
+        }
+      </section>
 
-  <p class="quiet-note">Puedes cambiar la frecuencia después de pausar los avisos.</p>
-</main>
+      <section class="card activity-card" id="activity" aria-labelledby="activity-title">
+        <div class="card-heading">
+          <h3 id="activity-title">
+            <span class="icon-tile lavender"
+              ><svg><use href="#i-chart" /></svg
+            ></span>
+            Esta semana
+          </h3>
+        </div>
+        <div class="week-chart" aria-label="Agua registrada esta semana">
+          @for (day of journal.week(); track day.key) {
+            <div
+              class="day-column"
+              [class.is-today]="day.today"
+              [class.is-future]="day.future"
+              [attr.aria-label]="day.key + ': ' + day.total + ' ml'"
+              [attr.title]="day.key + ' · ' + day.total + ' ml'"
+            >
+              <span class="day-value">{{
+                day.total
+                  ? (day.total / 1000).toLocaleString('es-ES', { maximumFractionDigits: 1 }) + ' l'
+                  : '—'
+              }}</span>
+              <div class="day-track"><span [style.height.%]="day.progress"></span></div>
+              <span class="day-label">{{ day.label }}</span
+              ><i></i>
+            </div>
+          }
+        </div>
+        <div class="activity-bottom">
+          <span><i></i> Agua registrada</span
+          ><strong
+            >{{ journal.drinks().length }}
+            {{ journal.drinks().length === 1 ? 'vaso hoy' : 'vasos hoy' }}</strong
+          >
+        </div>
+      </section>
+    </div>
+
+    <section class="recent-section" aria-labelledby="recent-title">
+      <div class="recent-heading">
+        <h3 id="recent-title">Registro <span>HOY</span></h3>
+      </div>
+      <div class="recent-drinks">
+        @for (drink of latestDrinks(); track $index) {
+          <div class="drink-entry">
+            <span class="mini-drop"
+              ><svg><use href="#i-drop" /></svg></span
+            ><strong>+{{ drink.amount }} ml</strong><span class="sr-only">Registrado</span
+            ><time>{{ drink.at | date: 'HH:mm' }}</time
+            ><svg class="entry-check"><use href="#i-check" /></svg>
+          </div>
+        } @empty {
+          <div class="empty-history">
+            <svg><use href="#i-glass" /></svg>
+            <p>Sin registros hoy.</p>
+            <a href="#water-log" aria-label="Registrar mi primer vaso"
+              ><svg><use href="#i-arrow" /></svg
+            ></a>
+          </div>
+        }
+      </div>
+    </section>
+  </main>
+</div>
+
+<dialog
+  #reminderDialog
+  class="drink-dialog"
+  aria-labelledby="dialog-title"
+  aria-describedby="dialog-description"
+  (cancel)="closeReminder()"
+  (close)="reminder.reminderDue.set(false)"
+>
+  <button
+    class="icon-button dialog-close"
+    type="button"
+    aria-label="Cerrar recordatorio"
+    (click)="closeReminder()"
+  >
+    <svg><use href="#i-close" /></svg>
+  </button>
+  <div class="reminder-art" aria-hidden="true">
+    <span class="reminder-ring ring-one"></span><span class="reminder-ring ring-two"></span
+    ><svg><use href="#i-drop" /></svg><i>✦</i><b>✧</b>
+  </div>
+  <h2 id="dialog-title">Hora de<br /><em>beber agua.</em></h2>
+  <p id="dialog-description">Haz una pausa para hidratarte.</p>
+  <button class="primary-button" type="button" (click)="addWater()">
+    <svg><use href="#i-check" /></svg> Registrar {{ selectedAmount() }} ml
+  </button>
+  <button class="dialog-later" type="button" (click)="closeReminder()">Cerrar</button>
+</dialog>
+<div class="toast-region" role="status" aria-live="polite">
+  @if (toast(); as notification) {
+    @if (notification.visible) {
+      <div class="toast">
+        <span
+          ><svg aria-hidden="true"><use href="#i-check" /></svg
+        ></span>
+        {{ notification.message }}
+      </div>
+    } @else {
+      <span class="sr-only">{{ notification.message }}</span>
+    }
+  }
+</div>

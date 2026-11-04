@@ -1,62 +1,116 @@
 :root {
-	--surface: #ffffff;
-	--surface-strong: #d9f1f2;
-	--water-soft: #dff4f6;
-	--water: #2c9cab;
-	--water-deep: #006d77;
-	--water-dark: #00545d;
-	--ink: #17383e;
-	--ink-muted: #536b70;
-	--line: #d5e7e8;
-	--line-strong: #aacdd0;
-	--focus: rgb(0 109 119 / 24%);
-	--active: #2f855a;
-	--active-soft: #d9f2e4;
-	--paused: #83989c;
-	--warm: #a14c2f;
-	--warm-soft: #fce9df;
-	--danger: #a32929;
-	--font-display: Georgia, "Times New Roman", serif;
-	--font-body: Aptos, "Trebuchet MS", sans-serif;
-	color-scheme: light;
-	font-family: var(--font-body);
-	font-synthesis: none;
-	letter-spacing: 0;
-	text-rendering: optimizeLegibility;
+  --background: #f2f4ff;
+  --surface: #fff;
+  --surface-soft: #f5f6fc;
+  --ink: #202448;
+  --ink-muted: #535c7e;
+  --line: #dce0f0;
+  --water-deep: #4149c9;
+  --water-dark: #3138ad;
+  --mint: #e5f8fa;
+  --mint-ink: #175a69;
+  --peach: #fcf0e4;
+  --orange: #a64928;
+  --lavender: #edeaff;
+  --lavender-ink: #5840a8;
+  --danger: #bb4747;
+  --shadow: 0 12px 28px #26307813;
+  --font-body: 'Aptos', 'Segoe UI', sans-serif;
+  --font-display: 'Georgia', 'Times New Roman', serif;
+  color-scheme: light;
+  font-family: var(--font-body);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
 }
-
+:root[data-theme='dark'] {
+  --background: #11152b;
+  --surface: #1b2140;
+  --surface-soft: #252b4b;
+  --ink: #f0f1ff;
+  --ink-muted: #b7c0df;
+  --line: #343c61;
+  --water-deep: #aab5ff;
+  --water-dark: #c6ceff;
+  --mint: #243c57;
+  --mint-ink: #a4edfa;
+  --peach: #442d43;
+  --orange: #ffc0a1;
+  --lavender: #36305b;
+  --lavender-ink: #d1c7ff;
+  --danger: #ffa8a8;
+  --shadow: 0 5px 24px #0003;
+  color-scheme: dark;
+}
 *,
 *::before,
 *::after {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
-
 html {
-	min-height: 100%;
-	background: #edf7f7;
+  min-width: 320px;
+  min-height: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 24px;
+  background: var(--background);
 }
-
 body {
-	min-height: 100dvh;
-	margin: 0;
-	background-color: #edf7f7;
-	background-image: repeating-linear-gradient(
-		165deg,
-		transparent 0,
-		transparent 4rem,
-		rgb(255 255 255 / 28%) 4rem,
-		rgb(255 255 255 / 28%) 8rem
-	);
-	color: var(--ink);
+  margin: 0;
+  min-height: 100dvh;
+  color: var(--ink);
+  background: var(--background);
 }
-
 button,
 input,
 select {
-	letter-spacing: 0;
+  font: inherit;
 }
-
+button,
+a,
+input,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
 button,
 select {
-	touch-action: manipulation;
+  touch-action: manipulation;
+}
+button,
+a {
+  transition:
+    background 0.2s,
+    color 0.2s,
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--water-deep);
+  outline-offset: 4px;
+}
+::selection {
+  background: #b8faf0;
+  color: #1b236a;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

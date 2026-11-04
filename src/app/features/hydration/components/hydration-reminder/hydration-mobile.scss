@@ -1,0 +1,110 @@
+@media (max-width: 760px) {
+  :host {
+    --bottom-nav: calc(69px + env(safe-area-inset-bottom));
+  }
+
+  .sidebar {
+    position: relative;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: calc(10px + env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 10px
+      max(16px, env(safe-area-inset-left));
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .brand {
+    margin: 0;
+  }
+
+  .brand h1 {
+    font-size: 19px;
+  }
+
+  .brand-mark {
+    width: 42px;
+    height: 42px;
+  }
+
+  .sidebar-bottom {
+    display: none;
+  }
+
+  .mobile-theme {
+    display: grid;
+  }
+
+  nav {
+    position: fixed;
+    inset: auto 0 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4px;
+    min-height: var(--bottom-nav);
+    padding: 6px max(10px, env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom))
+      max(10px, env(safe-area-inset-left));
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+    box-shadow: 0 -6px 24px #17265e14;
+  }
+
+  .nav-link {
+    flex-direction: column;
+    gap: 3px;
+    padding: 4px;
+    min-height: 56px;
+    border-radius: 14px;
+    font-size: 12px;
+    font-weight: 650;
+  }
+
+  .nav-icon {
+    width: 44px;
+    height: 28px;
+  }
+
+  .nav-link svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  .main-content {
+    margin: 0 auto;
+    padding: 20px max(14px, env(safe-area-inset-right)) calc(var(--bottom-nav) + 22px)
+      max(14px, env(safe-area-inset-left));
+  }
+
+  .page-header {
+    margin-bottom: 16px;
+  }
+
+  .page-header h2 {
+    font-size: 37px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .toast-region {
+    bottom: calc(var(--bottom-nav) + 10px);
+  }
+}
+
+@media (max-width: 370px) {
+  .main-content {
+    padding-inline: max(10px, env(safe-area-inset-left)) max(10px, env(safe-area-inset-right));
+  }
+
+  .page-header {
+    gap: 6px;
+  }
+
+  .card-heading h3 {
+    font-size: 15px;
+    gap: 8px;
+  }
+}

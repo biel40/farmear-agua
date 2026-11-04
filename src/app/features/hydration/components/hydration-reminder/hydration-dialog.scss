@@ -1,0 +1,150 @@
+.drink-dialog {
+  width: min(440px, calc(100% - 32px));
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 25px;
+  padding: 38px 32px 23px;
+  background: var(--surface);
+  color: var(--ink);
+  text-align: center;
+  box-shadow: 0 30px 100px #0003;
+}
+.drink-dialog::backdrop {
+  background: #102b2c70;
+  backdrop-filter: blur(7px);
+}
+.dialog-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: var(--surface-soft);
+}
+.dialog-close svg {
+  width: 23px;
+  height: 23px;
+}
+.reminder-art {
+  position: relative;
+  width: 160px;
+  height: 145px;
+  margin: 24px auto 10px;
+  display: grid;
+  place-items: center;
+}
+.reminder-art > svg {
+  position: relative;
+  width: 68px;
+  height: 85px;
+  color: var(--water-deep);
+  fill: var(--mint);
+  stroke-width: 1;
+}
+.reminder-ring {
+  position: absolute;
+  width: 115px;
+  height: 115px;
+  background: var(--mint);
+  border-radius: 50%;
+  opacity: 0.5;
+}
+.ring-two {
+  width: 145px;
+  height: 145px;
+  background: none;
+  border: 1px dashed var(--line);
+}
+.reminder-art i,
+.reminder-art b {
+  position: absolute;
+  font-style: normal;
+  color: var(--orange);
+  font-size: 25px;
+  left: 5px;
+  top: 15px;
+}
+.reminder-art b {
+  left: auto;
+  top: auto;
+  bottom: 20px;
+  right: 3px;
+  font-weight: 400;
+  font-size: 20px;
+}
+.drink-dialog h2 {
+  font-family: var(--font-display);
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -1px;
+}
+.drink-dialog h2 em {
+  color: var(--water-deep);
+}
+.drink-dialog p {
+  color: var(--ink-muted);
+  font-size: 14px;
+  line-height: 1.9;
+  margin-top: 18px;
+}
+.drink-dialog > .primary-button {
+  width: 100%;
+  margin-top: 25px;
+  min-height: 46px;
+  font-size: 12px;
+}
+.dialog-later {
+  border: 0;
+  min-height: 44px;
+  padding: 14px;
+  background: transparent;
+  color: var(--ink-muted);
+  font-size: 13px;
+}
+.dialog-footnote {
+  display: block;
+  border-top: 1px solid var(--line);
+  padding-top: 17px;
+  margin-top: 5px;
+  color: var(--ink-muted);
+  font-size: 9px;
+}
+.toast-region {
+  position: fixed;
+  bottom: max(24px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100% - 32px);
+  z-index: 20;
+  pointer-events: none;
+}
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  padding: 13px 20px 13px 12px;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+  font-size: 12px;
+}
+.toast > span {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--mint);
+  color: var(--mint-ink);
+  flex-shrink: 0;
+}
+.toast svg {
+  width: 15px;
+  height: 15px;
+}

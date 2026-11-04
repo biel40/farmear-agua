@@ -22,6 +22,8 @@ describe('HydrationReminderService', () => {
   };
 
   beforeEach(() => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2026-09-19T12:00:00.000Z'));
     vi.clearAllMocks();
     storage.get.mockReturnValue(savedConfiguration);
 
@@ -32,6 +34,43 @@ describe('HydrationReminderService', () => {
         { provide: StorageService, useValue: storage },
       ],
     });
+  });
+
+  afterEach(() => vi.useRealTimers());
+
+  it('opens an in-app reminder when due and advances the recurring countdown', () => {
+    const service = TestBed.inject(HydrationReminderService);
+    vi.advanceTimersByTime(45 * 60_000);
+    expect(service.reminderDue()).toBe(true);
+    expect(service.nextReminderAt()?.toISOString()).toBe('2026-09-19T13:30:00.000Z');
+    expect(service.countdown()).toBe('45:00');
+    service.reminderDue.set(false);
+    vi.advanceTimersByTime(1000);
+    expect(service.reminderDue()).toBe(false);
+    expect(service.countdown()).toBe('44:59');
+  });
+
+  it('catches up after suspension with one reminder and a future deadline', () => {
+    const service = TestBed.inject(HydrationReminderService);
+    vi.setSystemTime(new Date('2026-09-19T15:00:00.000Z'));
+    vi.advanceTimersByTime(1000);
+    expect(service.reminderDue()).toBe(true);
+    expect(service.nextReminderAt()?.toISOString()).toBe('2026-09-19T15:45:00.000Z');
+  });
+
+  it('does not emit in-app reminders after pausing', async () => {
+    const service = TestBed.inject(HydrationReminderService);
+    await service.pause();
+    vi.advanceTimersByTime(60 * 60_000);
+    expect(service.reminderDue()).toBe(false);
+    expect(service.countdown()).toBe('—');
+  });
+
+  it('rejects invalid and fractional intervals', () => {
+    const service = TestBed.inject(HydrationReminderService);
+    for (const minutes of [0, -1, 1.5, NaN, 1441]) {
+      expect(() => service.setInterval(minutes)).toThrow(RangeError);
+    }
   });
 
   it('restores the persisted reminder configuration', () => {

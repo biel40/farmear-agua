@@ -1,14 +1,34 @@
 <!doctype html>
 <html lang="es">
-<head>
-  <meta charset="utf-8">
-  <title>Farmear Agua</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#edf7f7">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Farmear Agua · Cada gota cuenta</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f2f4ff" />
+    <meta
+      name="description"
+      content="Cuida de ti, gota a gota. Registra tu agua, sigue tu progreso y encuentra tu ritmo con recordatorios de hidratación."
+    />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <script>
+      try {
+        const savedTheme = JSON.parse(localStorage.getItem('hydration-theme'));
+        const theme =
+          savedTheme === 'light' || savedTheme === 'dark'
+            ? savedTheme
+            : matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+        document.documentElement.dataset['theme'] = theme;
+        document.querySelector('meta[name="theme-color"]').content =
+          theme === 'dark' ? '#11152b' : '#f2f4ff';
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
 </html>

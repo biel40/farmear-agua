@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Farmear Agua</string>
+    <string name="title_activity_main">Farmear Agua</string>
+    <string name="package_name">es.farmearagua.app</string>
+    <string name="custom_url_scheme">es.farmearagua.app</string>
+</resources>
