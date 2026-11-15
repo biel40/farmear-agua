@@ -1,0 +1,103 @@
+.install-banner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 8px 12px;
+  margin-bottom: 16px;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--water-deep) 32%, var(--line));
+  border-radius: 18px;
+  background: linear-gradient(110deg, var(--lavender), var(--surface) 78%);
+}
+
+.install-mark {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  background: var(--water-deep);
+  color: var(--surface);
+}
+
+.install-copy h3 {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.install-copy p {
+  margin-top: 3px;
+  color: var(--ink-muted);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.install-action,
+.install-dismiss {
+  min-width: 44px;
+  min-height: 44px;
+  border: 0;
+  border-radius: 11px;
+}
+
+.install-action {
+  padding: 6px 14px;
+  background: var(--water-deep);
+  color: var(--surface);
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.install-action:hover:not(:disabled) {
+  background: var(--water-dark);
+}
+
+.install-dismiss {
+  display: grid;
+  place-items: center;
+  background: transparent;
+  color: var(--ink-muted);
+}
+
+.install-dismiss:hover {
+  background: var(--lavender);
+  color: var(--ink);
+}
+
+.install-dismiss svg {
+  width: 18px;
+  height: 18px;
+}
+
+.install-help {
+  grid-column: 2 / -1;
+  padding-top: 9px;
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+@media (max-width: 520px) {
+  .install-banner {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 6px 9px;
+    padding: 9px;
+  }
+
+  .install-dismiss {
+    grid-column: 3;
+    grid-row: 1;
+    align-self: start;
+  }
+
+  .install-action {
+    grid-column: 2 / -1;
+    justify-self: start;
+  }
+
+  .install-help {
+    grid-column: 1 / -1;
+  }
+}

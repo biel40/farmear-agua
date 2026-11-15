@@ -1,44 +1,202 @@
 .water-scene {
+  --mood-accent: #d1c7ff;
+  --water-top: #a3caff;
+  --water-bottom: #5da2ee;
+  --arm-angle: -32deg;
+  --glass-tilt: -8deg;
+  --float-height: -2px;
+  --float-time: 6s;
+  --spark-opacity: 0.3;
   grid-area: scene;
+  justify-self: stretch;
+  padding: 9px 12px 12px;
+  border: 1px solid #e1eaff30;
+  border-radius: 22px;
+  background:
+    radial-gradient(
+      ellipse at 50% 55%,
+      color-mix(in srgb, var(--mood-accent) 17%, transparent),
+      transparent 64%
+    ),
+    #12174764;
+}
+
+.water-scene[data-mood='warming'] {
+  --mood-accent: #a8ddff;
+  --water-top: #82dbff;
+  --water-bottom: #559df4;
+  --arm-angle: -12deg;
+  --glass-tilt: -5deg;
+  --float-height: -4px;
+  --float-time: 4.8s;
+  --spark-opacity: 0.55;
+}
+
+.water-scene[data-mood='happy'] {
+  --mood-accent: #a3ffec;
+  --water-top: #78ffe9;
+  --water-bottom: #43b9f5;
+  --arm-angle: 16deg;
+  --glass-tilt: -3deg;
+  --float-height: -7px;
+  --float-time: 3.8s;
+  --spark-opacity: 0.85;
+}
+
+.water-scene[data-mood='celebrating'] {
+  --mood-accent: #e4ffac;
+  --water-top: #abffbd;
+  --water-bottom: #48c4f5;
+  --arm-angle: 54deg;
+  --glass-tilt: 0deg;
+  --float-height: -9px;
+  --float-time: 3s;
+  --spark-opacity: 1;
+}
+
+.mascot-header,
+.mascot-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.mascot-header h4 {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pool-muted);
+}
+
+.mascot-period {
+  display: flex;
+  padding: 3px;
+  border-radius: 14px;
+  background: #11164680;
+}
+
+.mascot-period button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 9px;
+  border: 0;
+  border-radius: 11px;
+  background: transparent;
+  color: #e0e7ff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.mascot-period button:hover {
+  background: #ffffff20;
+}
+
+.mascot-period button[aria-pressed='true'] {
+  background: #e6eaff;
+  color: #20285f;
+}
+
+.mascot-period button:focus-visible {
+  outline-color: #a3faed;
+  outline-offset: -2px;
+}
+
+.mascot-stage {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
   place-items: center;
-  min-width: 0;
   pointer-events: none;
 }
 
 .scene-art {
   display: block;
-  width: min(108%, 300px);
+  width: min(100%, 252px);
   height: auto;
   overflow: visible;
   stroke: none;
 }
 
+.mascot-status {
+  padding: 8px 10px;
+  border: 1px solid #eef1ff29;
+  border-radius: 13px;
+  background: #151b4a85;
+}
+
+.mascot-mood {
+  color: var(--mood-accent);
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.mascot-week-note {
+  margin-top: 3px;
+  color: var(--pool-muted);
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.mascot-percent {
+  flex-shrink: 0;
+  padding: 4px 7px;
+  border-radius: 8px;
+  background: var(--mood-accent);
+  color: #1b236a;
+  font-size: 13px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
 .scene-halo {
-  fill: #8be5ff29;
+  fill: color-mix(in srgb, var(--mood-accent) 15%, transparent);
   transition: fill 0.45s ease;
 }
 
-.scene-complete .scene-halo {
-  fill: #b8ffe94a;
+.scene-orbit {
+  stroke: #d7faff50;
+  stroke-width: 1.6;
+  stroke-dasharray: 1 5;
 }
 
-.scene-orbit {
-  stroke: #d7faff61;
-  stroke-width: 1;
-  stroke-dasharray: 2 6;
+.scene-progress {
+  stroke: var(--mood-accent);
+  stroke-width: 2.4;
+  stroke-dasharray: var(--mascot-progress) 100;
+  transition:
+    stroke-dasharray 0.85s ease,
+    stroke 0.45s ease;
 }
 
 .glass-shadow {
-  fill: #111d655c;
+  fill: #11174d68;
 }
 
-.hero-glass {
-  transform-origin: center;
+.glass-stance {
   transform-box: fill-box;
-  transform: rotate(-6deg);
+  transform-origin: center bottom;
+  rotate: var(--glass-tilt);
+  transition: rotate 0.4s ease;
+}
+
+.glass-limb {
+  transform-box: fill-box;
+  stroke: #c2e7ff;
+  stroke-width: 6;
+  transition: rotate 0.4s ease;
+}
+
+.arm-left {
+  transform-origin: 100% 5px;
+  rotate: var(--arm-angle);
+}
+
+.arm-right {
+  transform-origin: 0 5px;
+  rotate: calc(-1 * var(--arm-angle));
 }
 
 .glass-body {
@@ -46,7 +204,7 @@
 }
 
 .glass-rim {
-  fill: #90cafa;
+  fill: #8ab6f1;
 }
 
 .glass-outline,
@@ -67,11 +225,19 @@
 }
 
 .wave-back {
-  fill: #2e91e6;
+  fill: var(--water-bottom);
 }
 
 .wave-front {
   fill: url(#water-tint);
+}
+
+.water-highlight {
+  stop-color: var(--water-top);
+}
+
+.water-depth {
+  stop-color: var(--water-bottom);
 }
 
 .bubble {
@@ -79,116 +245,45 @@
 }
 
 .glass-face {
-  fill: #1c3a73;
+  fill: #182e60;
 }
 
-.glass-face path {
-  stroke: #1c3a73;
-  stroke-width: 3.4;
+.face-line {
+  fill: none;
+  stroke: #182e60;
+  stroke-width: 3.6;
+}
+
+.face-glint {
+  fill: #fff;
+}
+
+.face-tongue {
+  fill: #ff9bbc;
 }
 
 .glass-cheek {
-  fill: #fc94c6;
-  opacity: 0.85;
+  fill: #f887b5;
+  opacity: var(--spark-opacity);
 }
 
 .scene-spark {
-  fill: #d6fff4;
+  fill: var(--mood-accent);
+  opacity: var(--spark-opacity);
+  transition:
+    opacity 0.4s ease,
+    fill 0.4s ease;
 }
 
 .spark-two {
-  fill: #c2c6ff;
+  fill: #d6c8ff;
+}
+
+.spark-three {
+  fill: #ffd3ed;
 }
 
 .scene-dot {
   fill: #b7cdff;
-}
-
-.splash {
-  position: absolute;
-  inset: 0;
-  --splash-accent: #9dfff0;
-  --splash-contrast: #e2e3ff;
-}
-
-.splash--goal {
-  --splash-accent: #ddff9e;
-  --splash-contrast: #ffc9f0;
-}
-
-.splash-ring {
-  position: absolute;
-  inset: 17% 14%;
-  border: 2px solid var(--splash-accent);
-  border-radius: 50%;
-}
-
-.splash i {
-  position: absolute;
-  top: 48%;
-  left: 50%;
-  width: 10px;
-  height: 13px;
-  border-radius: 65% 65% 65% 25%;
-  background: var(--splash-accent);
-  --dx: -55px;
-  --dy: -37px;
-  --spin: -55deg;
-}
-
-.splash i:nth-of-type(2n) {
-  background: var(--splash-contrast);
-  width: 7px;
-  height: 8px;
-}
-
-.splash i:nth-of-type(2) {
-  --dx: -68px;
-  --dy: 21px;
-  --spin: 30deg;
-}
-
-.splash i:nth-of-type(3) {
-  --dx: 54px;
-  --dy: -48px;
-  --spin: 85deg;
-}
-
-.splash i:nth-of-type(4) {
-  --dx: 66px;
-  --dy: 17px;
-  --spin: 25deg;
-}
-
-.splash i:nth-of-type(5) {
-  --dx: 21px;
-  --dy: -63px;
-  --spin: 145deg;
-}
-
-.splash i:nth-of-type(6) {
-  --dx: -29px;
-  --dy: 61px;
-  --spin: -35deg;
-}
-
-.water-pop {
-  position: absolute;
-  top: 11%;
-  left: 50%;
-  padding: 6px 11px;
-  border-radius: 999px;
-  background: var(--splash-accent);
-  color: #1b236a;
-  font-size: 14px;
-  font-weight: 800;
-  white-space: nowrap;
-  translate: -50% 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .splash-ring,
-  .splash i {
-    display: none;
-  }
+  opacity: 0.65;
 }

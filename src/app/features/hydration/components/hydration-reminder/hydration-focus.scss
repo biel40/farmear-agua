@@ -63,28 +63,34 @@
   }
 
   .daily-overview {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
     grid-template-areas:
-      'heading scene'
-      'summary scene'
-      'goal goal';
-    gap: 0 4px;
+      'heading heading'
+      'summary goal'
+      'scene scene';
+    gap: 12px 14px;
     padding: 18px 17px 17px;
     border-radius: 23px 23px 0 0;
-    min-height: 226px;
   }
 
-  .daily-overview .card-heading {
-    align-self: end;
+  .scene-art {
+    width: clamp(174px, 49vw, 218px);
+    max-width: 100%;
   }
 
-  .daily-summary {
-    align-self: start;
-    padding-top: 8px;
+  .goal-row {
+    flex-wrap: wrap;
+    gap: 0 8px;
   }
 
   .daily-controls {
     grid-template-columns: minmax(0, 1fr);
     padding: 14px 14px 5px;
+  }
+}
+
+@media (max-width: 370px) {
+  .water-total strong {
+    font-size: 35px;
   }
 }

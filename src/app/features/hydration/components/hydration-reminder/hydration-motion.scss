@@ -1,6 +1,107 @@
+.splash {
+  position: absolute;
+  inset: 0;
+  --splash-accent: #9dfff0;
+  --splash-contrast: #e2e3ff;
+}
+
+.splash--goal {
+  --splash-accent: #ddff9e;
+  --splash-contrast: #ffc9f0;
+}
+
+.splash-ring {
+  position: absolute;
+  inset: 17% 14%;
+  border: 2px solid var(--splash-accent);
+  border-radius: 50%;
+}
+
+.splash i {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  width: 10px;
+  height: 13px;
+  border-radius: 65% 65% 65% 25%;
+  background: var(--splash-accent);
+  --dx: -55px;
+  --dy: -37px;
+  --spin: -55deg;
+}
+
+.splash i:nth-of-type(2n) {
+  background: var(--splash-contrast);
+  width: 7px;
+  height: 8px;
+}
+
+.splash i:nth-of-type(2) {
+  --dx: -68px;
+  --dy: 21px;
+  --spin: 30deg;
+}
+
+.splash i:nth-of-type(3) {
+  --dx: 54px;
+  --dy: -48px;
+  --spin: 85deg;
+}
+
+.splash i:nth-of-type(4) {
+  --dx: 66px;
+  --dy: 17px;
+  --spin: 25deg;
+}
+
+.splash i:nth-of-type(5) {
+  --dx: 21px;
+  --dy: -63px;
+  --spin: 145deg;
+}
+
+.splash i:nth-of-type(6) {
+  --dx: -29px;
+  --dy: 61px;
+  --spin: -35deg;
+}
+
+.water-pop {
+  position: absolute;
+  top: 11%;
+  left: 50%;
+  padding: 6px 11px;
+  border-radius: 999px;
+  background: var(--splash-accent);
+  color: #1b236a;
+  font-size: 14px;
+  font-weight: 800;
+  white-space: nowrap;
+  translate: -50% 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splash-ring,
+  .splash i {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .hero-glass {
-    animation: glass-float 5s ease-in-out infinite;
+    animation: glass-float var(--float-time) ease-in-out infinite;
+  }
+
+  .mascot-stage:has(.splash) .glass-stance {
+    animation: glass-sip 0.6s ease-in-out;
+  }
+
+  .mascot-stage:has(.splash--alternate) .glass-stance {
+    animation: glass-wiggle 0.6s ease-in-out;
+  }
+
+  .mascot-stage:has(.splash--goal) .glass-stance {
+    animation: glass-cheer 0.8s ease-out;
   }
 
   .wave {
@@ -23,13 +124,17 @@
     animation-delay: -2.2s;
   }
 
-  .scene-spark,
+  .water-scene:is([data-mood='happy'], [data-mood='celebrating']) .scene-spark,
   .reminder-art > svg {
     animation: drift 4s ease-in-out infinite;
   }
 
-  .spark-two {
+  .scene-art .spark-two {
     animation-delay: -2s;
+  }
+
+  .scene-art .spark-three {
+    animation-delay: -3s;
   }
 
   .splash-ring {
@@ -72,12 +177,38 @@
 }
 
 @keyframes glass-float {
-  0%,
-  100% {
-    transform: translateY(0) rotate(-8deg);
-  }
   50% {
-    transform: translateY(-7px) rotate(-4deg);
+    translate: 0 var(--float-height);
+  }
+}
+
+@keyframes glass-sip {
+  25% {
+    transform: scale(1.06, 0.94);
+  }
+  55% {
+    transform: translateY(-10px) scale(0.97, 1.04);
+  }
+}
+
+@keyframes glass-wiggle {
+  24% {
+    transform: rotate(-8deg) scale(1.05, 0.96);
+  }
+  52% {
+    transform: translateY(-8px) rotate(6deg);
+  }
+}
+
+@keyframes glass-cheer {
+  18% {
+    transform: scale(1.09, 0.91);
+  }
+  46% {
+    transform: translateY(-23px) rotate(8deg) scale(0.98, 1.08);
+  }
+  75% {
+    transform: scale(1.04, 0.96);
   }
 }
 
@@ -122,7 +253,7 @@
   }
   to {
     opacity: 0;
-    transform: scale(1.25);
+    transform: scale(1.05);
   }
 }
 
